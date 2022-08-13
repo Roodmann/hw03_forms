@@ -1,5 +1,4 @@
 # Импортируем из приложения django.contrib.auth нужный view-класс
-from unicodedata import name
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from django.urls import path
 
@@ -20,8 +19,7 @@ urlpatterns = [
         name='login'
     ),
     path(
-        'password_change/', 
+        'password_change/',
         PasswordChangeView.as_view(),
-        name ='password_change'),
-   
-]        
+        name='password_change'),
+]

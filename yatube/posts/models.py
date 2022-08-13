@@ -19,12 +19,13 @@ class Post(models.Model):
         null=True,
         related_name='posts'
     )
+
     class Meta:
         ordering = ['-id']
 
     def __str__(self):
-        # выводим текст поста 
-        return self.text 
+        # выводим текст поста
+        return self.text
 
 
 class Group(models.Model):
@@ -34,7 +35,3 @@ class Group(models.Model):
 
     def __str__(self):
         return self.title[:50]
-
-
-
-    

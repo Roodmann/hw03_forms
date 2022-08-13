@@ -107,4 +107,4 @@ LOGIN_REDIRECT_URL = 'posts:home'
 #  подключаем движок filebased.EmailBackend
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 # указываем директорию, в которую будут складываться файлы писем
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails') 
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')

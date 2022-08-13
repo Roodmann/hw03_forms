@@ -7,6 +7,7 @@ from .models import Group, Post, User
 
 SUM_POSTS = 10
 
+
 def index(request):
     post_list = Post.objects.all().order_by('-pub_date')
     post_list = Post.objects.all()
@@ -15,7 +16,6 @@ def index(request):
     page_obj = paginator.get_page(page_number)
     context = {
         'page_obj': page_obj,
-        
     }
     return render(request, 'posts/index.html', context)
 
@@ -68,6 +68,7 @@ def post_create(request):
     }
     return render(request, 'posts/post_create.html', context)
 
+
 @login_required
 def post_edit(request, post_id):
     post = get_object_or_404(Post, id=post_id)
@@ -81,4 +82,4 @@ def post_edit(request, post_id):
         'form': form,
         'post': post
     }
-    return render(request, 'posts/post_create.html', context) 
+    return render(request, 'posts/post_create.html', context)
