@@ -21,17 +21,21 @@ class Post(models.Model):
     )
 
     class Meta:
-        ordering = ['-id']
+        verbose_name = 'Post'
+        ordering = ['-pub_date']
 
     def __str__(self):
         # выводим текст поста
-        return self.text
+        return self.text[:15]
 
 
 class Group(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
-    description = models.TextField(max_length=150)
+    description = models.TextField()
 
     def __str__(self):
         return self.title[:50]
+
+    class Meta:
+        verbose_name = 'Group'

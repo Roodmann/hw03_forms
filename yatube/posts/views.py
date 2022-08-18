@@ -8,12 +8,16 @@ from .models import Group, Post, User
 SUM_POSTS = 10
 
 
-def index(request):
-    post_list = Post.objects.all().order_by('-pub_date')
-    post_list = Post.objects.all()
-    paginator = Paginator(post_list, SUM_POSTS)
+def page_context(request, queryset):
+    paginator = Paginator(queryset, SUM_POSTS)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    return page_obj
+
+
+def index(request):
+    post_list = Post.objects.all()
+    page_obj = page_context(request, post_list)
     context = {
         'page_obj': page_obj,
     }
@@ -22,10 +26,8 @@ def index(request):
 
 def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
-    post_list = group.posts.all()[:SUM_POSTS]
-    paginator = Paginator(post_list, SUM_POSTS)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    post_list = group.posts.all()
+    page_obj = page_context(request, post_list)
     context = {
         'group': group,
         'page_obj': page_obj,
@@ -36,9 +38,7 @@ def group_posts(request, slug):
 def profile(request, username):
     author = get_object_or_404(User, username=username)
     posts = author.posts.all()
-    paginator = Paginator(posts, SUM_POSTS)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    page_obj = page_context(request, posts)
     context = {
         'author': author,
         'page_obj': page_obj,
